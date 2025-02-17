@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QHATU - Tienda en línea</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <header class="navbar">
+        <div class="logo">
+            <a href="/">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="QHATU Logo">
+            </a>
+        </div>
+        <form action="{{ url_for('product_list') }}" method="GET" class="search-bar">
+            <input type="text" name="query" placeholder="¡Hola! ¿Qué estás buscando hoy?" required>
+            <button type="submit" class="search-btn">
+                <span class="search-icon"></span>
+            </button>
+        </form>        
+        
+        <div class="user-options">
+            <div class="account">
+                <span>Mis pedidos</span>
+                <span>Iniciar sesión</span>
+            </div>
+            <div class="cart">
+                <span>🛒 $0.00</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Barra de navegación inferior -->
+    <nav class="main-nav">
+        <ul>
+            <li class="first-item">
+                <input type="checkbox" id="btn-menu">
+                <div class="container-menu">
+                    <div class="cont-menu">
+                        <nav>
+                            <a href="#">Supermercado</a>
+                            <a href="#">Electrónica</a>
+                            <a href="#">Ropa</a>
+                            <a href="#">Hogar</a>
+                            <a href="#">Juguetes</a>
+                        </nav>
+                        <label for="btn-menu">&times;</label>
+                    </div>
+                </div>
+                <label for="btn-menu" class="btn-menu">&#9776; Categorías</label>
+            </li>
+            <li><a href="#">Nuestras Tiendas</a></li>
+            <li><a href="#">Nuestras Recetas</a></li>
+            <li><a href="#">Tarjetas QHATU</a></li>
+            <li><a href="#">Catálogo</a></li>
+        </ul>
+    </nav>
+
+    <!-- Detalle del producto -->
+    <section class="product-detail">
+        <div class="container">
+            <div class="product-info">
+                <!-- Galería de imágenes del producto -->
+                <div class="product-image-gallery">
+                    <div class="main-image">
+                        <img src="../static/img/{{ product['image'] }}" alt="Imagen de {{ product['name'] }}" class="product-img">
+                    </div>
+                    <div class="thumbnail-gallery">
+                        {% for image in product['additional_images'] %}
+                            <img src="../static/img/{{ image }}" alt="Imagen adicional de {{ product['name'] }}" class="thumbnail">
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Detalles del producto -->
+                <div class="product-details">
+                    <h2 id="product-name" data-product-id="{{ product['id'] }}" class="product-title">{{ product['name'] }}</h2>
+                    <p class="price">Precio: <span id="product-price" class="price-value">{{ product['price'] }}</span></p>
+                    <div class="ratings">
+                        <span>⭐⭐⭐⭐☆</span> (4.5/5 - 23 reseñas)
+                    </div>
+                    <p class="description">{{ product['description'] }}</p>
+                    <ul class="product-features">
+                        {% for feature in product['features'] %}
+                            <li>{{ feature }}</li>
+                        {% endfor %}
+                    </ul>
+    
+                    <!-- Opciones de compra -->
+                    <div class="buy-section">
+                        <div class="quantity-selector">
+                            <label for="quantity">Cantidad: </label>
+                            <input type="number" id="quantity" name="quantity" value="1" min="1" max="99" class="quantity-input">
+                        </div>
+                        <!-- Botón para abrir el modal de opciones de pago -->
+                        <button class="buy-now" onclick="openPaymentModal()">Comprar ahora</button>
+                    </div>
+                    
+                    <!-- Modal de opciones de pago -->
+                    <div id="payment-modal" class="modal">
+                        <div class="modal-content">
+                            <span class="close-btn" onclick="closePaymentModal()">&times;</span>
+                            <h2>Selecciona tu forma de pago</h2>
+                            <button onclick="choosePayment('credito')">A Crédito</button>
+                            <button onclick="choosePayment('contado')">Al contado</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>

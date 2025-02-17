@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QHATU - Tienda en línea</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='img/logo.ico') }}">
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <header class="navbar">
+        <div class="logo">
+            <a href="/">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="QHATU Logo">
+            </a>
+        </div>
+        <form action="{{ url_for('product_list') }}" method="GET" class="search-bar">
+            <input type="text" name="query" placeholder="¡Hola! ¿Qué estás buscando hoy?" required>
+            <button type="submit" class="search-btn">
+                <span class="search-icon"></span>
+            </button>
+        </form>        
+        
+        <div class="user-options">
+            <div class="user-options">
+                <div class="delivery-container">
+                    </div>
+                </div>
+            <div class="account">
+                <span>Carrito</span>
+                <span>Iniciar sesión</span>
+            </div>
+            <div class="cart">
+                <span>🛒 $0.00</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Barra de navegación inferior -->
+    <nav class="main-nav">
+        <ul>
+            <li class="first-item">
+                <input type="checkbox" id="btn-menu">
+
+<!-- El menú lateral -->
+<div class="container-menu">
+  <div class="cont-menu">
+    <nav>
+      <a href="#">NO DISPONIBLE</a>
+      <a href="#"></a>
+      <a href="#"></a>
+      <a href="#"></a>
+      <a href="#"></a>
+    </nav>
+    <!-- Botón para cerrar el menú lateral -->
+    <label for="btn-menu">&times;</label>
+  </div>
+</div>
+
+<!-- Botón que activa el menú (en dispositivos pequeños) -->
+<label for="btn-menu" class="btn-menu">&#9776; CATEGORÍAS</label>
+                </div>
+            </li>
+            <li><a href="#">...</a></li>
+            <li><a href="#">...</a></li>
+            <li><a href="#">...</a></li>
+            <li><a href="#">...</a></li>
+        </ul>
+    </nav>
+    <!-- Productos Más Destacados -->
+    <section class="featured-products">
+        <h2>Productos Más Destacados</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="{{ url_for('static', filename='img/televisor.png') }}" alt="Televisor">
+                <h3>Televisor</h3>
+                <p>$20.00</p>
+                <a href="{{ url_for('product_detail', product_id='1') }}">
+                    <button>Ver detalles</button>
+                </a>
+            </div>
+            <div class="product-card">
+                <img src="{{ url_for('static', filename='img/microondas.png') }}" alt="Microondas">
+                <h3>Microondas</h3>
+                <p>$35.00</p>
+                <a href="{{ url_for('product_detail', product_id='2') }}">
+                    <button>Ver detalles</button>
+                </a>
+            </div>
+            <div class="product-card">
+                <img src="{{ url_for('static', filename='img/peluche.png') }}" alt="Peluche">
+                <h3>Peluche</h3>
+                <p>$500.00</p>
+                <a href="{{ url_for('product_detail', product_id='3') }}">
+                    <button>Ver detalles</button>
+                </a>
+            </div>
+            <!-- Más productos -->
+        </div>
+    </section>
+
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>

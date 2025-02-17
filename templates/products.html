@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QHATU - Tienda en línea</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <!-- Barra de navegación -->
+    <header class="navbar">
+        <div class="logo">
+            <a href="/">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="QHATU Logo">
+            </a>
+        </div>
+        <form action="{{ url_for('product_list') }}" method="GET" class="search-bar">
+            <input type="text" name="query" placeholder="¡Hola! ¿Qué estás buscando hoy?" required>
+            <button type="submit" class="search-btn">
+                <span class="search-icon"></span>
+            </button>
+        </form>
+        
+        <div class="user-options">
+            <div class="user-options">
+                <div class="delivery-container">
+                    </div>
+                </div>
+            <div class="account">
+                <span>Mis pedidos</span>
+                <span>Iniciar sesión</span>
+            </div>
+            <div class="cart">
+                <span>🛒 $0.00</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Barra de navegación inferior -->
+    <nav class="main-nav">
+        <ul>
+            <li class="first-item">
+                <input type="checkbox" id="btn-menu">
+
+<!-- El menú lateral -->
+<div class="container-menu">
+  <div class="cont-menu">
+    <nav>
+      <a href="#">Supermercado</a>
+      <a href="#">Electrónica</a>
+      <a href="#">Ropa</a>
+      <a href="#">Hogar</a>
+      <a href="#">Juguetes</a>
+    </nav>
+    <!-- Botón para cerrar el menú lateral -->
+    <label for="btn-menu">&times;</label>
+  </div>
+</div>
+
+<!-- Botón que activa el menú (en dispositivos pequeños) -->
+<label for="btn-menu" class="btn-menu">&#9776; Categorías</label>
+                </div>
+            </li>
+            <li><a href="#">Nuestras Tiendas</a></li>
+            <li><a href="#">Nuestras Recetas</a></li>
+            <li><a href="#">Tarjetas QHATU</a></li>
+            <li><a href="#">Catálogo</a></li>
+        </ul>
+    </nav>
+
+    <!-- Título de la página -->
+    <section class="page-title">
+        <h1 id="page-title">{{ query if query else "Nuestros Productos" }}</h1>  <!-- Título dinámico -->
+    </section>
+
+    <!-- Lista de Productos -->
+    <section class="product-list">
+        <div class="product-grid">
+            {% for product in products %}
+            <div class="product-card">
+                <img src="../static/img/{{ product['image'] }}" alt="{{ product['name'] }}">
+                <h3>{{ product['name'] }}</h3>
+                <p class="price">{{ product['price'] }}</p>
+                <p>{{ product['description'] }}</p>
+                <a href="{{ url_for('product_detail', product_id=product['id']) }}">
+                    <button class="view-details">Ver detalles</button>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    
+</body>
+</html>
